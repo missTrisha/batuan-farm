@@ -1,0 +1,135 @@
+@import "tailwindcss";
+
+
+   /* Design tokens for the MAO Batuan Farm Input Distribution System.
+   Palette now follows the dashboard mockup: deep forest green, emerald
+   accent, mint-white pages and white cards.
+   Every --color-* below becomes a Tailwind color, for example:
+   bg-primary, text-ink, border-line, bg-page, text-forest-900.
+    */
+@theme {
+  /* --- Brand palette --- */
+  --color-forest-950: #082b20;
+  --color-forest-900: #0b3d2e;
+  --color-forest-800: #0f5a43;
+  --color-forest-700: #166534;
+  --color-forest-600: #15803d;
+  --color-sage-100: #f3f8f5;
+  --color-sage-200: #e1ece5;
+  --color-sage-300: #b9cdc0;
+  --color-gold-300: #e8c77b;
+  --color-gold-500: #b49050;
+  --color-amber-500: #ab7431;
+  --color-sun-500: #ea9526;
+
+  /* --- Semantic colors (use these in components) --- */
+  --color-page: #f3f8f5; /* app pages: mint-white */
+  --color-surface: #ffffff; /* cards and form panels */
+  --color-ink: #0f2f24;
+  --color-muted: #5b6b63;
+  --color-placeholder: #7a8a82;
+  --color-line: #d6e2db;
+  --color-primary: #15803d;
+  --color-primary-hover: #166534;
+  --color-on-primary: #ffffff;
+  --color-link: #166534;
+
+  /* Form feedback */
+  --color-danger: #b3261e;
+  --color-danger-bg: #fbe9e7;
+  --color-success: #2e6b3a;
+  --color-success-bg: #e6f2e8;
+  --color-warning: #7a5b00;
+  --color-warning-bg: #fff4d6;
+
+  /* --- Type (guessed from the mockup; confirm with the designer) --- */
+  --font-serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-sans:
+    "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* --- Shape --- */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* --- Depth --- */
+  --shadow-card: 0 24px 60px -12px rgb(0 0 0 / 0.45);
+
+  /* --- Motion --- */
+  --animate-fade-up: fade-up 0.5s ease-out both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-page);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-serif);
+    line-height: 1.15;
+  }
+
+  input::placeholder {
+    color: var(--color-placeholder);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  /* Minimum tap size for field use on phones.
+     Override on small icon buttons with the min-h-0 class. */
+  button,
+  [role="button"] {
+    min-height: 44px;
+    cursor: pointer;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+}
+
+@layer components {
+  /* Deep green backdrop with a faint leaf texture, for the login page
+     (and any other full-screen auth page). Use: className="auth-bg" */
+  .auth-bg {
+    background-color: var(--color-forest-900);
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Cpath d='M40 14C58 34 58 58 40 78C22 58 22 34 40 14Z'/%3E%3Cpath transform='rotate(55 120 120)' d='M120 90C134 106 134 124 120 140C106 124 106 106 120 90Z'/%3E%3C/g%3E%3C/svg%3E"),
+      linear-gradient(
+        135deg,
+        var(--color-forest-950) 0%,
+        var(--color-forest-900) 45%,
+        var(--color-forest-800) 100%
+      );
+  }
+}
