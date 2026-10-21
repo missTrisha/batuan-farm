@@ -13,7 +13,8 @@ import DistributionPage from "./pages/DistributionPage";
 import InventoryPage from "./pages/InventoryPage";
 import ReportsPage from "./pages/ReportsPage";
 import NotificationsPage from "./pages/NotificationsPage";
-import SettingsPage from "./pages/SettingsPage";
+import UserManagementPage from "./pages/UserManagementPage";
+import AuditLogsPage from "./pages/AuditLogsPage";
 import AccountPage from "./pages/AccountPage";
 
 export default function App() {
@@ -62,8 +63,13 @@ export default function App() {
           <Route element={<RequireAdmin role={profile.role} />}>
             <Route
               path="settings"
-              element={<SettingsPage currentUserId={profile.id} />}
+              element={<Navigate to="/settings/users" replace />}
             />
+            <Route
+              path="settings/users"
+              element={<UserManagementPage currentUserId={profile.id} />}
+            />
+            <Route path="settings/audit-logs" element={<AuditLogsPage />} />
           </Route>
 
           <Route path="*" element={<Navigate to="/" replace />} />

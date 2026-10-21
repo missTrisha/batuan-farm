@@ -4,6 +4,7 @@ import type { Role } from "./navItems";
 import SidebarBrand from "./SidebarBrand";
 import SidebarLink from "./SidebarLink";
 import SidebarToggle from "./SidebarToggle";
+import SidebarGroup from "./SidebarGroup";
 
 type SidebarProps = {
   role: Role;
@@ -43,14 +44,23 @@ export default function Sidebar({
         <SidebarBrand collapsed={collapsed} />
 
         <nav className="flex flex-col gap-1 px-3 pb-4">
-          {items.map((item) => (
-            <SidebarLink
-              key={item.to}
-              item={item}
-              collapsed={collapsed}
-              onNavigate={onCloseMobile}
-            />
-          ))}
+          {items.map((item) =>
+            item.children ? (
+              <SidebarGroup
+                key={item.to}
+                item={item}
+                collapsed={collapsed}
+                onNavigate={onCloseMobile}
+              />
+            ) : (
+              <SidebarLink
+                key={item.to}
+                item={item}
+                collapsed={collapsed}
+                onNavigate={onCloseMobile}
+              />
+            ),
+          )}
         </nav>
       </aside>
     </>
