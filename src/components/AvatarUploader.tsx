@@ -62,12 +62,13 @@ export default function AvatarUploader({
       return;
     }
 
-    const { error: updateError } = await supabase
+    const { data, error: updateError } = await supabase
       .from("profiles")
       .update({ avatar_path: newPath })
-      .eq("id", userId);
+      .eq("id", userId)
+      .select("id");
 
-    if (updateError) {
+    if (updateError || !data || data.length === 0) {
       // Roll back the orphaned file
       await supabase.storage.from(BUCKET).remove([newPath]);
       setError("Could not save your picture. Please try again.");
@@ -89,12 +90,13 @@ export default function AvatarUploader({
     setError(null);
     setBusy("remove");
 
-    const { error: updateError } = await supabase
+    const { data, error: updateError } = await supabase
       .from("profiles")
       .update({ avatar_path: null })
-      .eq("id", userId);
+      .eq("id", userId)
+      .select("id");
 
-    if (updateError) {
+    if (updateError || !data || data.length === 0) {
       setError("Could not remove your picture. Please try again.");
       setBusy(null);
       return;
@@ -129,6 +131,7 @@ export default function AvatarUploader({
             <Button
               variant="ghost"
               className="px-4 py-2 text-sm"
+              loading={busy === "remove"}
               loadingText="Removing..."
               disabled={busy !== null}
               onClick={handleRemove}

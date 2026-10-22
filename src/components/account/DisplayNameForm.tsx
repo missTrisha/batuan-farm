@@ -42,14 +42,15 @@ export default function DisplayNameForm({
     setError(null);
     setSaving(true);
 
-    const { error: updateError } = await supabase
+    const { data, error: updateError } = await supabase
       .from("profiles")
       .update({ display_name: trimmed })
-      .eq("id", userId);
+      .eq("id", userId)
+      .select("id");
 
     setSaving(false);
 
-    if (updateError) {
+    if (updateError || !data || data.length === 0) {
       setError("Could not save your name. Please try again.");
       return;
     }
