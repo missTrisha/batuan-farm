@@ -11,7 +11,7 @@ import {
 } from "react-icons/fi";
 import { FaSeedling, FaHandshake, FaLeaf, FaWarehouse } from "react-icons/fa";
 import { supabase } from "../lib/supabase";
-import farmImg from "../assets/images/farm.png";
+import farmImg from "../assets/images/farm.jpg";
 import logoImg from "../assets/images/logo.jpg";
 
 const features = [

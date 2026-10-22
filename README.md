@@ -89,7 +89,7 @@ Create a `.env` file in the project root:
 
 ```bash
 VITE_SUPABASE_URL=your-project-url
-VITE_SUPABASE_ANON_KEY=your-anon-or-publishable-key
+VITE_SUPABASE_PUBLISHABLE_KEY=your-anon-or-publishable-key
 ```
 
 Run the app:
