@@ -51,7 +51,7 @@ export default function ProfileMenu({
 
   return (
     <div ref={wrapperRef} className="relative">
-      <button
+      {/* <button
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-haspopup="menu"
@@ -67,6 +67,35 @@ export default function ProfileMenu({
         </span>
         <FiChevronDown
           className={`text-muted transition-transform ${open ? "rotate-180" : ""}`}
+        />
+      </button> */}
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-haspopup="menu"
+        aria-expanded={open}
+        aria-label="Open profile menu"
+        className="flex items-center gap-3 rounded-xl px-2 py-1.5 transition hover:bg-primary/10"
+      >
+        {/* Phones: simple icon */}
+        <span className="grid h-10 w-10 place-items-center rounded-full bg-primary/10 text-ink sm:hidden">
+          <FiUser className="text-xl" />
+        </span>
+
+        {/* sm and up: avatar */}
+        <span className="hidden sm:block">
+          <Avatar name={displayName} src={avatarUrl} />
+        </span>
+
+        <span className="hidden min-w-0 flex-col text-left leading-tight sm:flex">
+          <span className="max-w-40 truncate text-sm font-bold text-ink">
+            {displayName}
+          </span>
+          <span className="text-xs text-muted">{roleLabels[role]}</span>
+        </span>
+
+        <FiChevronDown
+          className={`hidden text-muted transition-transform sm:block ${open ? "rotate-180" : ""}`}
         />
       </button>
 
