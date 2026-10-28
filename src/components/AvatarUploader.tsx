@@ -108,17 +108,19 @@ export default function AvatarUploader({
   }
 
   return (
-    <div className="flex items-center gap-4">
-      <Avatar
-        src={url}
-        name={displayName ?? ""}
-        className="h-20 w-20 text-2xl"
-      />
+    <div className="flex flex-col gap-3">
+      {/* <div className="flex items-center gap-4"> */}
+      <div className="flex items-center gap-20">
+        <Avatar
+          src={url}
+          name={displayName ?? ""}
+          shape="square"
+          className="h-28 w-28 text-3xl"
+        />
 
-      <div className="flex flex-col gap-2">
-        <div className="flex flex-wrap gap-2">
+        <div className="flex w-40 flex-col gap-2">
           <Button
-            className="px-4 py-2 text-sm"
+            className="w-full px-4 py-2 text-sm"
             loading={busy === "upload"}
             loadingText="Uploading..."
             disabled={busy !== null}
@@ -129,8 +131,8 @@ export default function AvatarUploader({
 
           {avatarPath && (
             <Button
-              variant="ghost"
-              className="px-4 py-2 text-sm"
+              variant="danger"
+              className="w-full bg-danger! text-white! px-4 py-2 text-sm hover:bg-danger/90!"
               loading={busy === "remove"}
               loadingText="Removing..."
               disabled={busy !== null}
@@ -140,10 +142,10 @@ export default function AvatarUploader({
             </Button>
           )}
         </div>
-
-        <p className="text-xs text-ink/60">JPG, PNG, or WebP. Max 2 MB.</p>
-        {error && <p className="text-sm text-danger">{error}</p>}
       </div>
+
+      <p className="text-xs text-ink/60">JPG, PNG, or WebP. Max 2 MB.</p>
+      {error && <p className="text-sm text-danger">{error}</p>}
 
       <input
         ref={inputRef}
