@@ -110,12 +110,12 @@ export default function AvatarUploader({
   return (
     <div className="flex flex-col gap-3">
       {/* <div className="flex items-center gap-4"> */}
-      <div className="flex items-center gap-20">
+      <div className="flex items-center gap-16">
         <Avatar
           src={url}
           name={displayName ?? ""}
           shape="square"
-          className="h-28 w-28 text-3xl"
+          className="h-24 w-24 text-3xl"
         />
 
         <div className="flex w-40 flex-col gap-2">

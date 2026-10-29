@@ -66,7 +66,10 @@ export default function DashboardLayout({
         />
 
         {/* The only part of the screen that scrolls */}
-        <main className="flex-1 overflow-y-auto p-4 sm:p-6">
+        {/* <main className="flex-1 overflow-y-auto p-4 sm:p-6">
+          <Outlet />
+        </main> */}
+        <main className="flex-1 overflow-y-auto bg-green-50 p-6">
           <Outlet />
         </main>
       </div>

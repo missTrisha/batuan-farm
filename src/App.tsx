@@ -8,6 +8,7 @@ import NoAccess from "./components/auth/NoAccess";
 import FullScreenLoader from "./components/ui/FullScreenLoader";
 import DashboardPage from "./pages/DashboardPage";
 import FarmersPage from "./pages/FarmersPage";
+import RegisterFarmerPage from "./pages/RegisterFarmerPage";
 import QualificationPage from "./pages/QualificationPage";
 import DistributionPage from "./pages/DistributionPage";
 import InventoryPage from "./pages/InventoryPage";
@@ -47,6 +48,7 @@ export default function App() {
         >
           <Route index element={<DashboardPage />} />
           <Route path="farmers" element={<FarmersPage />} />
+          <Route path="farmers/new" element={<RegisterFarmerPage />} />
           <Route path="qualification" element={<QualificationPage />} />
           <Route path="distribution" element={<DistributionPage />} />
           <Route path="inventory" element={<InventoryPage />} />
