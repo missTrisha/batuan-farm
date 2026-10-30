@@ -3,6 +3,7 @@ import type { Farmer } from "../../types/farmer";
 import FarmerStatusBadge from "./FarmerStatusBadge";
 
 interface Props {
+  rowNumber: number; // display only, renumbers by position
   farmer: Farmer;
   barangayName: string;
 }
@@ -18,13 +19,19 @@ function buildFullName(farmer: Farmer): string {
   return `${farmer.last_name}, ${given}${suffix}`;
 }
 
-export default function FarmerRow({ farmer, barangayName }: Props) {
+export default function FarmerRow({ rowNumber, farmer, barangayName }: Props) {
   return (
-    <tr className="border-b border-green-100 transition-colors last:border-0 hover:bg-green-50">
+    <tr className="border-b border-green-200 transition-colors last:border-0 hover:bg-green-200">
+      <td className="whitespace-nowrap px-5 py-4 text-sm font-medium text-gray-600">
+        {rowNumber}
+      </td>
       <td className="whitespace-nowrap px-5 py-4 text-sm text-gray-700">
         {farmer.farmer_number ?? (
-          <span className="text-xs italic text-gray-400">Awaiting sync</span>
+          <span className="text-xs italic text-gray-500">Awaiting sync</span>
         )}
+      </td>
+      <td className="whitespace-nowrap px-5 py-4 text-sm text-gray-700">
+        {farmer.rsbsa_id ?? "—"}
       </td>
       <td className="px-5 py-4 text-sm font-semibold text-gray-900">
         {buildFullName(farmer)}

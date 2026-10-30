@@ -51,24 +51,6 @@ export default function ProfileMenu({
 
   return (
     <div ref={wrapperRef} className="relative">
-      {/* <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        aria-haspopup="menu"
-        aria-expanded={open}
-        className="flex items-center gap-3 rounded-xl px-2 py-1.5 transition hover:bg-primary/10"
-      >
-        <Avatar name={displayName} src={avatarUrl} />
-        <span className="hidden min-w-0 flex-col text-left leading-tight sm:flex">
-          <span className="max-w-40 truncate text-sm font-bold text-ink">
-            {displayName}
-          </span>
-          <span className="text-xs text-muted">{roleLabels[role]}</span>
-        </span>
-        <FiChevronDown
-          className={`text-muted transition-transform ${open ? "rotate-180" : ""}`}
-        />
-      </button> */}
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}

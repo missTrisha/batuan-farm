@@ -8,24 +8,19 @@ import RegisterFarmerForm from "../components/farmers/form/RegisterFarmerForm";
 export default function RegisterFarmerPage() {
   const navigate = useNavigate();
 
-  async function handleSubmit(input: FarmerInput) {
-    await registerFarmer(input);
+  async function handleSubmit(input: FarmerInput, photo: File | null) {
+    await registerFarmer(input, photo);
     navigate("/farmers");
   }
-
   return (
     <div className="mx-auto max-w-5xl">
       <Link
         to="/farmers"
-        className="inline-flex items-center gap-2 text-sm font-medium text-green-700 hover:text-green-800"
+        className="mb-5 inline-flex items-center gap-2 rounded-lg border border-green-300 bg-green-100 px-4 py-2 text-sm font-semibold text-green-800 shadow-sm transition hover:border-green-500 hover:bg-green-200"
       >
         <FiArrowLeft aria-hidden="true" />
         Back to farmers
       </Link>
-
-      <h1 className="mb-5 mt-3 font-serif text-2xl font-bold text-gray-900">
-        Register farmer
-      </h1>
 
       <RegisterFarmerForm
         onSubmit={handleSubmit}

@@ -5,7 +5,15 @@ import { useBarangays } from "../../hooks/useBarangays";
 import FarmerRow from "./FarmerRow";
 import FarmersEmptyState from "./FarmersEmptyState";
 
-const COLUMNS = ["Farmer No.", "Name", "Barangay", "Contact", "Status"];
+const COLUMNS = [
+  "No.",
+  "Farmer Local ID",
+  "RSBSA ID",
+  "Name",
+  "Barangay",
+  "Contact",
+  "Status",
+];
 
 interface Props {
   farmers: Farmer[];
@@ -23,7 +31,7 @@ export default function FarmersTable({ farmers, loading }: Props) {
   }, [barangays]);
 
   return (
-    <div className="overflow-x-auto rounded-xl border border-green-200 bg-white shadow-sm">
+    <div className="overflow-x-auto rounded-xl border border-green-200 bg-green-100 shadow-sm">
       <table className="min-w-full text-left">
         <thead className="bg-green-700">
           <tr>
@@ -38,12 +46,12 @@ export default function FarmersTable({ farmers, loading }: Props) {
             ))}
           </tr>
         </thead>
-        <tbody>
+        <tbody className="bg-green-100">
           {loading && farmers.length === 0 ? (
             <tr>
               <td
                 colSpan={COLUMNS.length}
-                className="px-5 py-12 text-center text-sm text-gray-500"
+                className="px-5 py-12 text-center text-sm text-gray-600"
               >
                 Loading farmers...
               </td>
@@ -55,9 +63,10 @@ export default function FarmersTable({ farmers, loading }: Props) {
               </td>
             </tr>
           ) : (
-            farmers.map((farmer) => (
+            farmers.map((farmer, index) => (
               <FarmerRow
                 key={farmer.id}
+                rowNumber={index + 1}
                 farmer={farmer}
                 barangayName={barangayNames.get(farmer.barangay_id) ?? "—"}
               />

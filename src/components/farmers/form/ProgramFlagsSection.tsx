@@ -30,9 +30,9 @@ export default function ProgramFlagsSection({
   }
 
   return (
-    <section className="rounded-xl border border-green-200 bg-white p-5 shadow-sm sm:p-6">
+    <section className="rounded-xl border border-green-200 bg-green-100 p-5 shadow-sm sm:p-6">
       <h2 className="text-base font-bold text-gray-900">Program details</h2>
-      <p className="mt-1 text-sm text-gray-500">
+      <p className="mt-1 text-sm text-gray-600">
         Check all that apply to the farmer.
       </p>
 

@@ -7,9 +7,11 @@ import { useFarmerForm } from "../../../hooks/useFarmerForm";
 import PersonalInfoSection from "./PersonalInfoSection";
 import AddressSection from "./AddressSection";
 import ProgramFlagsSection from "./ProgramFlagsSection";
+import RemarksSection from "./RemarksSection";
+import PhotoSection from "./PhotoSection";
 
 interface Props {
-  onSubmit: (input: FarmerInput) => Promise<void>;
+  onSubmit: (input: FarmerInput, photo: File | null) => Promise<void>;
   onCancel: () => void;
 }
 
@@ -17,6 +19,7 @@ export default function RegisterFarmerForm({ onSubmit, onCancel }: Props) {
   const { values, errors, setField, validate } = useFarmerForm();
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [photoFile, setPhotoFile] = useState<File | null>(null);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -26,7 +29,7 @@ export default function RegisterFarmerForm({ onSubmit, onCancel }: Props) {
 
     setSubmitting(true);
     try {
-      await onSubmit(toFarmerInput(values));
+      await onSubmit(toFarmerInput(values), photoFile);
     } catch (err) {
       setSubmitError(
         err instanceof Error ? err.message : "Could not register the farmer.",
@@ -38,6 +41,11 @@ export default function RegisterFarmerForm({ onSubmit, onCancel }: Props) {
 
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
+      <PhotoSection
+        file={photoFile}
+        onChange={setPhotoFile}
+        disabled={submitting}
+      />
       <PersonalInfoSection
         values={values}
         errors={errors}
@@ -49,6 +57,7 @@ export default function RegisterFarmerForm({ onSubmit, onCancel }: Props) {
         errors={errors}
         onChange={setField}
       />
+      <RemarksSection values={values} errors={errors} onChange={setField} />
 
       {submitError && (
         <p
