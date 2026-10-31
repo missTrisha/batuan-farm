@@ -11,6 +11,7 @@ const COLUMNS = [
   "RSBSA ID",
   "Name",
   "Barangay",
+  "Purok/Sitio",
   "Contact",
   "Status",
 ];
@@ -18,9 +19,14 @@ const COLUMNS = [
 interface Props {
   farmers: Farmer[];
   loading: boolean;
+  startIndex?: number; // rows before this page, e.g. 25 on page 2
 }
 
-export default function FarmersTable({ farmers, loading }: Props) {
+export default function FarmersTable({
+  farmers,
+  loading,
+  startIndex = 0,
+}: Props) {
   const { barangays } = useBarangays();
 
   // id -> name lookup, so each row doesn't need its own query
@@ -66,9 +72,10 @@ export default function FarmersTable({ farmers, loading }: Props) {
             farmers.map((farmer, index) => (
               <FarmerRow
                 key={farmer.id}
-                rowNumber={index + 1}
+                rowNumber={startIndex + index + 1}
                 farmer={farmer}
                 barangayName={barangayNames.get(farmer.barangay_id) ?? "—"}
+                purokSitio={farmer.purok_sitio ?? "—"}
               />
             ))
           )}

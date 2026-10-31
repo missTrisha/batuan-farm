@@ -7,11 +7,11 @@ import FormField from "./FormField";
 import { inputClass } from "./fieldStyles";
 
 // Values must match the database check constraints (lowercase).
-const GENDER_OPTIONS = [
+export const GENDER_OPTIONS = [
   { value: "male", label: "Male" },
   { value: "female", label: "Female" },
 ];
-const CIVIL_STATUS_OPTIONS = [
+export const CIVIL_STATUS_OPTIONS = [
   { value: "single", label: "Single" },
   { value: "married", label: "Married" },
   { value: "widowed", label: "Widowed" },

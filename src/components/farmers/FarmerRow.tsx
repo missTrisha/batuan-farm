@@ -1,4 +1,5 @@
 // src/components/farmers/FarmerRow.tsx
+import { Link, useNavigate } from "react-router-dom";
 import type { Farmer } from "../../types/farmer";
 import FarmerStatusBadge from "./FarmerStatusBadge";
 
@@ -6,6 +7,7 @@ interface Props {
   rowNumber: number; // display only, renumbers by position
   farmer: Farmer;
   barangayName: string;
+  purokSitio: string | null;
 }
 
 function buildFullName(farmer: Farmer): string {
@@ -19,9 +21,20 @@ function buildFullName(farmer: Farmer): string {
   return `${farmer.last_name}, ${given}${suffix}`;
 }
 
-export default function FarmerRow({ rowNumber, farmer, barangayName }: Props) {
+export default function FarmerRow({
+  rowNumber,
+  farmer,
+  barangayName,
+  purokSitio,
+}: Props) {
+  const navigate = useNavigate();
+  const detailsPath = `/farmers/${farmer.id}`;
+
   return (
-    <tr className="border-b border-green-200 transition-colors last:border-0 hover:bg-green-200">
+    <tr
+      onClick={() => navigate(detailsPath)}
+      className="cursor-pointer border-b border-green-200 transition-colors last:border-0 hover:bg-green-200"
+    >
       <td className="whitespace-nowrap px-5 py-4 text-sm font-medium text-gray-600">
         {rowNumber}
       </td>
@@ -34,9 +47,16 @@ export default function FarmerRow({ rowNumber, farmer, barangayName }: Props) {
         {farmer.rsbsa_id ?? "—"}
       </td>
       <td className="px-5 py-4 text-sm font-semibold text-gray-900">
-        {buildFullName(farmer)}
+        <Link
+          to={detailsPath}
+          onClick={(event) => event.stopPropagation()}
+          className="hover:text-green-800 hover:underline"
+        >
+          {buildFullName(farmer)}
+        </Link>
       </td>
       <td className="px-5 py-4 text-sm text-gray-700">{barangayName}</td>
+      <td className="px-5 py-4 text-sm text-gray-700">{purokSitio}</td>
       <td className="whitespace-nowrap px-5 py-4 text-sm text-gray-700">
         {farmer.contact_number ?? "—"}
       </td>
